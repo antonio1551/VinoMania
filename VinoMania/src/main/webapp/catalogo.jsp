@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Collection" %>
+<%@ page import="model.Prodotto" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogo - Vino Mania</title>
+    <style>
+        /* Un po' di CSS base per rendere la griglia presentabile */
+        body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
+        .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .card { background: white; border: 1px solid #ddd; padding: 15px; border-radius: 8px; width: 250px; text-align: center; }
+        .prezzo { color: #8B0000; font-weight: bold; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+
+    <h1>I Nostri Vini</h1>
+    
+    <div class="grid">
+        <%
+            // 1. Recuperiamo l'attributo inserito dalla Servlet nella request
+            Collection<Prodotto> prodotti = (Collection<Prodotto>) request.getAttribute("prodotti");
+            
+            // 2. Controlliamo se ci sono prodotti
+            if (prodotti != null && !prodotti.isEmpty()) {
+                
+                // 3. Ciclo for per generare una card HTML per ogni singolo vino
+                for (Prodotto p : prodotti) {
+        %>
+                    <div class="card">
+                        <%-- Usiamo i metodi Getter del Bean per stampare i valori --%>
+                        <h3><%= p.getNome() %></h3>
+                        <p><em><%= p.getCategoria() %></em></p>
+                        <p><%= p.getDescrizione() %></p>
+                        <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> €</p>
+                    </div>
+        <%
+                }
+            } else {
+        %>
+                <p>Nessun prodotto disponibile al momento. Ritorna più tardi!</p>
+        <%
+            }
+        %>
+    </div>
+
+</body>
+</html>
