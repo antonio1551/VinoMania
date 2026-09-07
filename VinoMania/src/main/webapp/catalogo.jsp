@@ -28,17 +28,21 @@
             if (prodotti != null && !prodotti.isEmpty()) {
                 
                 // 3. Ciclo for per generare una card HTML per ogni singolo vino
+            	<%
                 for (Prodotto p : prodotti) {
-        %>
-                    <div class="card">
-                        <%-- Usiamo i metodi Getter del Bean per stampare i valori --%>
-                        <h3><%= p.getNome() %></h3>
-                        <p><em><%= p.getCategoria() %></em></p>
-                        <p><%= p.getDescrizione() %></p>
-                        <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> €</p>
-                    </div>
-        <%
+            %>
+                <div class="card">
+                    <%-- Aggiungiamo il tag img che punta alla cartella images unita al nome file del database --%>
+                    <img src="images/<%= p.getImmagine() %>" alt="<%= p.getNome() %>" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;">
+                    
+                    <h3><%= p.getNome() %></h3>
+                    <p><em><%= p.getCategoria() %></em></p>
+                    <p><%= p.getDescrizione() %></p>
+                    <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> €</p>
+                </div>
+            <%
                 }
+            %>
             } else {
         %>
                 <p>Nessun prodotto disponibile al momento. Ritorna più tardi!</p>
