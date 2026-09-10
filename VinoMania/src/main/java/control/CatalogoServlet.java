@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+// Attenzione: su Tomcat 10+ si usa "jakarta" e non "javax"
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import model.Prodotto;
 import model.ProdottoDAO;
@@ -17,7 +18,7 @@ import model.ProdottoDAO;
 /**
  * Servlet per la gestione del catalogo prodotti.
  */
-@WebServlet("/catalogo") // Questo è l'URL per richiamare la Servlet dal browser
+@WebServlet("/catalogo") 
 public class CatalogoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -44,13 +45,12 @@ public class CatalogoServlet extends HttpServlet {
         } catch (SQLException e) {
             // In caso di errore col database, stampiamo l'errore nella console di Eclipse
             e.printStackTrace();
-            // E reindirizziamo l'utente a una pagina di errore generica (opzionale)
-            response.sendRedirect("error.jsp");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore nel recupero dei prodotti dal database");
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Per ora facciamo in modo che le richieste POST vengano gestite come le GET
+        // Gestiamo le richieste POST allo stesso modo delle GET
         doGet(request, response);
     }
 }

@@ -28,7 +28,7 @@
             if (prodotti != null && !prodotti.isEmpty()) {
                 
                 // 3. Ciclo for per generare una card HTML per ogni singolo vino
-            	<%
+            	
                 for (Prodotto p : prodotti) {
             %>
                 <div class="card">
