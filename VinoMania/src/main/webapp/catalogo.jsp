@@ -18,7 +18,7 @@
 </head>
 <body>
 
-// Inclusione dell'header
+<!-- /* Inclusione dell'header */ -->
 
 <jsp:include page="header.jsp" />
 
