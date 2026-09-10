@@ -41,14 +41,17 @@
                     <p class="prezzo"><%= String.format("%.2f", p.getPrezzo()) %> €</p>
                 </div>
             <%
-                }
-            %>
-            } else {
+                } // Chiude il ciclo for per i prodotti
+            } else { 
         %>
                 <p>Nessun prodotto disponibile al momento. Ritorna più tardi!</p>
         <%
-            }
+            } // Chiude l'else
         %>
+    </div>
+
+</body>
+</html>
     </div>
 
 </body>
