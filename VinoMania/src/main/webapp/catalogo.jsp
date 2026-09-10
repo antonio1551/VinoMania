@@ -8,14 +8,24 @@
     <meta charset="UTF-8">
     <title>Catalogo - Vino Mania</title>
     <style>
-        /* Un po' di CSS base per rendere la griglia presentabile */
-        body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
+        /* [QUI RIMANE IL TUO CSS PRECEDENTE] */
+        body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 0; margin: 0; }
+        .container { padding: 20px; }
         .grid { display: flex; flex-wrap: wrap; gap: 20px; }
         .card { background: white; border: 1px solid #ddd; padding: 15px; border-radius: 8px; width: 250px; text-align: center; }
         .prezzo { color: #8B0000; font-weight: bold; font-size: 1.2em; }
     </style>
 </head>
 <body>
+
+// Inclusione dell'header
+
+<jsp:include page="header.jsp" />
+
+    <div class="container">
+        <h1>I Nostri Vini</h1>
+        
+        <div class="grid">
 
     <h1>I Nostri Vini</h1>
     

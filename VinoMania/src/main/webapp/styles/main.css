@@ -1,0 +1,27 @@
+/* Palette e Stili Globali - Vino Mania */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+}
+.hero {
+    background: linear-gradient(rgba(139, 0, 0, 0.8), rgba(90, 0, 0, 0.9)), #8B0000;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+.hero h1 { font-size: 3em; margin-bottom: 10px; }
+.hero p { font-size: 1.2em; margin-bottom: 25px; }
+.btn {
+    background-color: #ffffff;
+    color: #8B0000;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.btn:hover { background-color: #e0e0e0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center; }
