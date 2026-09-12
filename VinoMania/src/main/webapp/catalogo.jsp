@@ -27,9 +27,6 @@
         
         <div class="grid">
 
-    <h1>I Nostri Vini</h1>
-    
-    <div class="grid">
         <%
             // 1. Recuperiamo l'attributo inserito dalla Servlet nella request
             Collection<Prodotto> prodotti = (Collection<Prodotto>) request.getAttribute("prodotti");
