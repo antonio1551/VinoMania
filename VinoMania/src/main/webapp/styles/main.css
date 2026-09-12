@@ -25,3 +25,56 @@ body {
 }
 .btn:hover { background-color: #e0e0e0; }
 .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+
+/* Stili per il Carrello */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.cart-table th, .cart-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.cart-table th {
+    background-color: #8B0000;
+    color: white;
+}
+.cart-summary {
+    margin-top: 30px;
+    text-align: right;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+.cart-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+.qta-input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+}
+.btn-small {
+    background-color: #4CAF50; /* Verde per conferme */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btn-remove {
+    background-color: #d9534f; /* Rosso per rimozioni */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btn-remove:hover { background-color: #c9302c; }
