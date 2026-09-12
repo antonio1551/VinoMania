@@ -34,7 +34,7 @@
                     for (Prodotto p : catalogo) {
             %>
                 <div class="card">
-                    <!-- Se hai il tag immagine, lascialo qui (es. <img src="images/..." />) -->
+                    <img src="${pageContext.request.contextPath}/images/<%= p.getImmagine() %>" alt="<%= p.getNome() %>" style="max-width: 100%; height: 200px; object-fit: contain;">
                     
                     <h3><%= p.getNome() %></h3>
                     <p><em><%= p.getCategoria() %></em></p>
