@@ -78,3 +78,27 @@ body {
     border-radius: 4px;
 }
 .btn-remove:hover { background-color: #c9302c; }
+
+/* Stili per la validazione dei form */
+.error-msg {
+    color: red;
+    font-size: 0.85em;
+    display: none; /* Nascosto di default */
+    margin-top: 5px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+.input-error {
+    border: 2px solid red !important;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    text-align: left;
+}
+.form-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
