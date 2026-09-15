@@ -125,4 +125,62 @@ public class OrdineDAO {
         }
         return ordini;
     }
+    
+    /**
+     * Recupera il dettaglio dei prodotti acquistati in uno specifico ordine.
+     * Utilizza una LEFT JOIN per gestire i prodotti che potrebbero essere stati cancellati dal catalogo.
+     */
+    public synchronized List<ItemCarrello> doRetrieveDettagliByOrdine(int idOrdine) throws SQLException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<ItemCarrello> dettagli = new ArrayList<>();
+
+        // Join tra composizione e prodotto. Leggiamo il prezzo dalla composizione!
+        String query = "SELECT c.quantita, c.prezzo_acquisto, p.id, p.nome, p.categoria, p.immagine " +
+                       "FROM composizione_ordine c " +
+                       "LEFT JOIN prodotto p ON c.id_prodotto = p.id " +
+                       "WHERE c.id_ordine = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, idOrdine);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Prodotto p = new Prodotto();
+                
+                // Gestione del caso in cui il prodotto è stato cancellato dal DB (ON DELETE SET NULL)
+                String nomeProdotto = rs.getString("p.nome");
+                if (nomeProdotto == null) {
+                    p.setNome("Vino fuori catalogo (eliminato)");
+                    p.setCategoria("N/D");
+                    // p.setImmagine("default.jpg"); // Opzionale se hai un'immagine di default
+                } else {
+                    p.setId(rs.getInt("p.id"));
+                    p.setNome(nomeProdotto);
+                    p.setCategoria(rs.getString("p.categoria"));
+                    // p.setImmagine(rs.getString("p.immagine")); // Scommenta se usi il campo immagine
+                }
+                
+                // CRUCIALE: Assegniamo al prodotto il prezzo storico salvato nell'ordine!
+                p.setPrezzo(rs.getDouble("c.prezzo_acquisto"));
+
+                ItemCarrello item = new ItemCarrello();
+                item.setProdotto(p);
+                item.setQuantita(rs.getInt("c.quantita"));
+
+                dettagli.add(item);
+            }
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } finally {
+                DriverManagerConnectionPool.releaseConnection(connection);
+            }
+        }
+        return dettagli;
+    }
 }

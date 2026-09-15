@@ -3,6 +3,9 @@ package model;
 public class ItemCarrello {
     private Prodotto prodotto;
     private int quantita;
+    
+    public ItemCarrello() {
+    }
 
     public ItemCarrello(Prodotto prodotto, int quantita) {
         this.prodotto = prodotto;

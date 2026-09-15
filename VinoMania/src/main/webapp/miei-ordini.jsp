@@ -34,6 +34,7 @@
                         <th>Data</th>
                         <th>Indirizzo di Spedizione</th>
                         <th>Totale</th>
+                        <th>Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,10 @@
                             <td><%= o.getDataOrdine() %></td>
                             <td><%= o.getIndirizzo() %></td>
                             <td><strong>&euro; <%= df.format(o.getTotale()) %></strong></td>
+                            <!-- NUOVO PULSANTE -->
+                            <td>
+                                <a href="${pageContext.request.contextPath}/dettaglio-ordine?id=<%= o.getId() %>" class="btn" style="padding: 5px 10px; font-size: 0.9em;">Vedi Dettagli</a>
+                            </td>
                         </tr>
                     <% } %>
                 </tbody>
