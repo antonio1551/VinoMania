@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+import java.util.ArrayList;
 
 public class OrdineDAO {
 
@@ -82,5 +84,45 @@ public class OrdineDAO {
                 DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
+    }
+    
+    /**
+     * Recupera lo storico degli ordini di un singolo utente (dal più recente)
+     */
+    public synchronized List<Ordine> doRetrieveByUser(int idUtente) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        List<Ordine> ordini = new ArrayList<>();
+
+        // Selezioniamo gli ordini ordinandoli per data decrescente
+        String selectSQL = "SELECT * FROM " + TABLE_ORDINE + " WHERE id_utente = ? ORDER BY data_ordine DESC, id DESC";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, idUtente);
+
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Ordine ordine = new Ordine();
+                ordine.setId(rs.getInt("id"));
+                ordine.setIdUtente(rs.getInt("id_utente"));
+                ordine.setTotale(rs.getDouble("totale"));
+                ordine.setIndirizzo(rs.getString("indirizzo"));
+                ordine.setDataOrdine(rs.getString("data_ordine"));
+                ordine.setNumeroCarta(rs.getString("numero_carta"));
+                ordini.add(ordine);
+            }
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } finally {
+                DriverManagerConnectionPool.releaseConnection(connection);
+            }
+        }
+        return ordini;
     }
 }
