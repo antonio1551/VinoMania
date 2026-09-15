@@ -9,6 +9,7 @@ public class Ordine {
     private double totale;
     private String indirizzo;
     private String dataOrdine;
+    private String numeroCarta;
     
     // Lista che conterrà i prodotti esatti con la quantità acquistata
     private List<ItemCarrello> prodottiAcquistati; 
@@ -31,6 +32,9 @@ public class Ordine {
 
     public String getDataOrdine() { return dataOrdine; }
     public void setDataOrdine(String dataOrdine) { this.dataOrdine = dataOrdine; }
+    
+    public String getNumeroCarta() { return numeroCarta; }
+    public void setNumeroCarta(String numeroCarta) { this.numeroCarta = numeroCarta; }
 
     public List<ItemCarrello> getProdottiAcquistati() { return prodottiAcquistati; }
     public void setProdottiAcquistati(List<ItemCarrello> prodottiAcquistati) { 

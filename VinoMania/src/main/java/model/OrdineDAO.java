@@ -22,7 +22,7 @@ public class OrdineDAO {
         ResultSet rs = null;
 
         // Query per l'ordine principale (la data viene gestita automaticamente dal DB usando NOW() o CURDATE())
-        String insertOrdine = "INSERT INTO " + TABLE_ORDINE + " (id_utente, totale, indirizzo, data_ordine) VALUES (?, ?, ?, CURDATE())";
+        String insertOrdine = "INSERT INTO " + TABLE_ORDINE + " (id_utente, totale, indirizzo, data_ordine, numero_carta) VALUES (?, ?, ?, CURDATE(), ?)";
         
         // Query per i dettagli dell'ordine (CONGELIAMO IL PREZZO QUI)
         String insertComposizione = "INSERT INTO " + TABLE_COMPOSIZIONE + " (id_ordine, id_prodotto, quantita, prezzo_acquisto) VALUES (?, ?, ?, ?)";
@@ -38,6 +38,7 @@ public class OrdineDAO {
             psOrdine.setInt(1, ordine.getIdUtente());
             psOrdine.setDouble(2, ordine.getTotale());
             psOrdine.setString(3, ordine.getIndirizzo());
+            psOrdine.setString(4, ordine.getNumeroCarta());
             psOrdine.executeUpdate();
 
             // 2. Recuperiamo l'ID generato per questo nuovo ordine
