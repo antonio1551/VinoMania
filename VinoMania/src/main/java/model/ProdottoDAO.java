@@ -85,6 +85,38 @@ public class ProdottoDAO {
         }
         return bean;
     }
+    
+    /**
+     * Aggiorna i dati di un prodotto esistente nel database (Funzione Admin)
+     */
+    public synchronized void doUpdate(Prodotto prodotto) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        // Query di UPDATE: aggiorniamo tutti i campi basandoci sull'ID
+        String updateSQL = "UPDATE prodotto SET nome = ?, categoria = ?, descrizione = ?, prezzo = ?, quantita = ? WHERE id = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(updateSQL);
+
+            preparedStatement.setString(1, prodotto.getNome());
+            preparedStatement.setString(2, prodotto.getCategoria());
+            preparedStatement.setString(3, prodotto.getDescrizione());
+            preparedStatement.setDouble(4, prodotto.getPrezzo());
+            preparedStatement.setInt(5, prodotto.getQuantita());
+            preparedStatement.setInt(6, prodotto.getId()); // Il parametro WHERE
+
+            preparedStatement.executeUpdate();
+
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } finally {
+                DriverManagerConnectionPool.releaseConnection(connection);
+            }
+        }
+    }
 
     /**
      * Elimina un prodotto dal database in base all'ID.
