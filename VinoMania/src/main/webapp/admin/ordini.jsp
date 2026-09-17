@@ -54,7 +54,7 @@
                             <td><strong>&euro; <%= df.format(o.getTotale()) %></strong></td>
                             <td>
                                 <!-- Ricicliamo la Servlet DettaglioOrdine! L'amministratore può usare la stessa pagina del cliente per vedere il dettaglio! -->
-                                <a href="${pageContext.request.contextPath}/dettaglio-ordine?id=<%= o.getId() %>" class="btn" style="padding: 5px 10px; font-size: 0.9em; background-color: #555;">Dettaglio</a>
+                                <a href="${pageContext.request.contextPath}/dettaglio-ordine?id=<%= o.getId() %>" class="btn" style="padding: 5px 10px; font-size: 0.9em; background-color: #fff954;">Dettaglio</a>
                             </td>
                         </tr>
                     <% } %>
