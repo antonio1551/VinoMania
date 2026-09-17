@@ -183,4 +183,42 @@ public class OrdineDAO {
         }
         return dettagli;
     }
+    
+    /**
+     * Recupera lo storico completo di TUTTI gli ordini (Funzione Admin)
+     */
+    public synchronized List<Ordine> doRetrieveAllOrdini() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        List<Ordine> ordini = new ArrayList<>();
+
+        // Selezioniamo tutti gli ordini dal database
+        String selectSQL = "SELECT * FROM " + TABLE_ORDINE + " ORDER BY data_ordine DESC, id DESC";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Ordine ordine = new Ordine();
+                ordine.setId(rs.getInt("id"));
+                ordine.setIdUtente(rs.getInt("id_utente")); // Qui vediamo a quale utente appartiene
+                ordine.setTotale(rs.getDouble("totale"));
+                ordine.setIndirizzo(rs.getString("indirizzo"));
+                ordine.setDataOrdine(rs.getString("data_ordine"));
+                ordine.setNumeroCarta(rs.getString("numero_carta"));
+                ordini.add(ordine);
+            }
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } finally {
+                DriverManagerConnectionPool.releaseConnection(connection);
+            }
+        }
+        return ordini;
+    }
 }
