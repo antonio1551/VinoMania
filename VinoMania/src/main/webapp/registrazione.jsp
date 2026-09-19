@@ -33,8 +33,10 @@
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <span id="erroreEmail" class="error-msg">Inserisci un indirizzo email valido.</span>
+                <input type="email" id="email" name="email" onblur="verificaEmailAJAX()" required>
+                <span id="emailError" class="error-msg" style="display: none; color: #f44336; font-size: 0.9em; margin-top: 5px;">
+                    Attenzione: Questa email è già registrata!
+                </span>
             </div>
 
             <div class="form-group">
@@ -54,5 +56,43 @@
 
     <!-- JS esterno inserito in fondo al body per ottimizzare il caricamento -->
     <script src="${pageContext.request.contextPath}/scripts/validazione.js"></script>
+    
+    <script>
+        function verificaEmailAJAX() {
+            var emailInput = document.getElementById("email");
+            var emailError = document.getElementById("emailError");
+            var submitBtn = document.getElementById("btnRegistrati"); // Sostituisci con l'ID del tuo bottone Submit
+            
+            var email = emailInput.value;
+
+            // Chiamata AJAX solo se il campo non è vuoto
+            if (email.length > 0) {
+                var xhr = new XMLHttpRequest();
+                
+                xhr.onreadystatechange = function() {
+                    // Quando la risposta è pronta e lo stato HTTP è 200 (OK)
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var risposta = xhr.responseText;
+                        
+                        if (risposta === "esiste") {
+                            // Modifica del DOM per mostrare l'errore
+                            emailError.style.display = "block";
+                            emailInput.style.border = "2px solid #f44336"; // Bordo rosso
+                            if(submitBtn) submitBtn.disabled = true; // Blocca il form
+                        } else {
+                            // L'email è libera, rimuoviamo gli errori
+                            emailError.style.display = "none";
+                            emailInput.style.border = "1px solid #ccc";
+                            if(submitBtn) submitBtn.disabled = false; // Sblocca il form
+                        }
+                    }
+                };
+                
+                // Prepariamo e inviamo la richiesta GET alla nostra nuova Servlet
+                xhr.open("GET", "${pageContext.request.contextPath}/verifica-email?email=" + encodeURIComponent(email), true);
+                xhr.send();
+            }
+        }
+    </script>
 </body>
 </html>

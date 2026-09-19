@@ -77,4 +77,36 @@ public class UtenteDAO {
         }
         return bean; // Ritorna null se le credenziali sono errate
     }
+    
+    /**
+     * Verifica se un'email è già presente nel database (Usato per AJAX)
+     */
+    public synchronized boolean checkEmailExists(String email) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        boolean esiste = false;
+
+        String selectSQL = "SELECT email FROM utente WHERE email = ?";
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setString(1, email);
+
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                esiste = true; // Se il ResultSet ha almeno una riga, l'email è occupata
+            }
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } finally {
+                DriverManagerConnectionPool.releaseConnection(connection);
+            }
+        }
+        return esiste;
+    }
 }
