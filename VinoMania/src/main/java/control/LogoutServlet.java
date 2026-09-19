@@ -2,7 +2,6 @@ package control;
 
 import java.io.IOException;
 
-// Import per Tomcat 10.1+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

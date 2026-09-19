@@ -3,7 +3,6 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 
-// Import per Tomcat 10.1+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             Utente utente = utenteDAO.doRetrieveByEmailAndPassword(email, password);
 
             if (utente != null) {
-                // 2. CREAZIONE DELLA SESSIONE (Fondamentale per i requisiti d'esame)
+                // 2. CREAZIONE DELLA SESSIONE 
                 HttpSession session = request.getSession();
                 session.setAttribute("utente", utente); // Questo è il nostro "token" di accesso
 

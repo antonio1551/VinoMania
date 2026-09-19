@@ -17,11 +17,11 @@ public class Prodotto implements Serializable {
     private String categoria; // es. "Rosso", "Bianco", "Spumante", "Passito"
     private String immagine;  // Nome del file immagine (es. "chianti.jpg")
 
-    // 1. Costruttore vuoto (obbligatorio per lo standard Java Bean)
+    // 1. Costruttore vuoto 
     public Prodotto() {
     }
 
-    // 2. Costruttore completo (comodo per la creazione rapida degli oggetti dal DAO)
+    // 2. Costruttore completo 
     public Prodotto(int id, String nome, String descrizione, double prezzo, int quantita, String categoria, String immagine) {
         this.id = id;
         this.nome = nome;

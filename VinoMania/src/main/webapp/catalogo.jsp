@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Catalogo - Vino Mania</title>
     <style>
-        /* [QUI RIMANE IL TUO CSS PRECEDENTE] */
+        
         body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 0; margin: 0; }
         .container { padding: 20px; }
         .grid { display: flex; flex-wrap: wrap; gap: 20px; }
@@ -55,14 +55,15 @@
                     </form>
                 </div>
             <%
-                    } // Chiude il ciclo for
+                    } 
                 } else { 
             %>
                 <p>Nessun prodotto disponibile al momento. Ritorna più tardi!</p>
             <%
-                } // Chiude l'else
+                } 
             %>
         </div>
+	</div>
 
 </body>
 </html>

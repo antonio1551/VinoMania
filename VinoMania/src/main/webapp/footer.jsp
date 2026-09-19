@@ -13,5 +13,5 @@
 </style>
 <div class="footer">
     <p>&copy; 2026 Vino Mania — E-commerce di Eccellenze Enologiche</p>
-    <p>Corso di Laurea in Informatica | Università degli Studi di Salerno</p>
+    <p>Corso di Laurea in Informatica | Università degli Studi di Salerno | Esposito Antonio 0512120148</p>
 </div>

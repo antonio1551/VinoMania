@@ -3,7 +3,6 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 
-// Import corretti per Tomcat 10.1+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

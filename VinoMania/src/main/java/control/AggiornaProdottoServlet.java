@@ -30,7 +30,7 @@ public class AggiornaProdottoServlet extends HttpServlet {
             return;
         }
 
-        // 2. Recupero dei parametri inviati dal form (incluso l'ID nascosto!)
+        // 2. Recupero dei parametri inviati dal form (incluso l'ID nascosto)
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             String nome = request.getParameter("nome");

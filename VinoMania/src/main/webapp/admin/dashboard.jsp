@@ -45,7 +45,7 @@
 </head>
 <body>
 
-    <!-- Nota il "/" prima di header.jsp: serve per dire a Tomcat di cercarlo nella cartella principale e non in /admin/ -->
+    
     <jsp:include page="/header.jsp" />
 
     <div class="container">
@@ -68,7 +68,7 @@
                 <a href="${pageContext.request.contextPath}/admin/aggiungi-prodotto.jsp" class="btn" style="background-color: #4CAF50; color: white; display: block;">+ Aggiungi Vino</a>
             </div>
 
-            <!-- Card 3: Visualizza tutti gli ordini (Opzionale ma molto utile) -->
+            <!-- Visualizza ordini -->
             <div class="admin-card">
                 <h3>Tutti gli Ordini</h3>
                 <p>Visualizza lo storico completo degli ordini effettuati da tutti i clienti del sito.</p>

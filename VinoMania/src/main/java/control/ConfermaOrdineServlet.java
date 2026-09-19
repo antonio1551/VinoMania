@@ -55,7 +55,7 @@ public class ConfermaOrdineServlet extends HttpServlet {
             // 4. Salvo tutto nel Database
             ordineDAO.doSave(ordine);
 
-            // 5. REQUISITO D'ESAME: Svuotiamo il carrello dopo l'acquisto
+            // 5. Svuotiamo il carrello dopo l'acquisto
             carrello.Svuota();
 
             // 6. Rimandiamo a una pagina di successo

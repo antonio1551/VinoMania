@@ -34,7 +34,6 @@ public class GestioneProdottiServlet extends HttpServlet {
 
         try {
             // 2. Recupero tutti i prodotti dal database
-        	// Sostituisci la vecchia riga 37 con questa:
         	List<Prodotto> catalogo = new ArrayList<>(prodottoDAO.doRetrieveAll(""));
             
             // 3. Passo la lista alla JSP
